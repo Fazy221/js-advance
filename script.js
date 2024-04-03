@@ -64,37 +64,94 @@ console.log(sum2);
 
 // Reduce Method
 /*
-  // Example 1 (reducing to single value)
-  const items = [
-    { name: "Apple", price: 100 },
-    { name: "Banana", price: 30 },
-    { name: "Chocolate", price: 340 },
-  ];
-  
-  const calcItem = items.reduce((acc, item) => {
-    return (acc += item.price);
-  }, 0);
-  
-  console.log(calcItem);
-  
-  
-  // Example 2 (by category; still confusing)
-  const foods = [
-    { name: "Apple", category: "Fruit" },
-    { name: "Lettuce", category: "Vegetable" },
-    { name: "Banana", category: "Fruit" },
-    { name: "Carrot", category: "Vegetable" },
-  ];
-  
-  const catFood = foods.reduce((acc, food) => {
-    const category = food.category;
-    if (!acc[category]) {
-        acc[category] = [];
-      }
-    acc[category].push(food.name);
-    return acc;
-  }, {});
-  
-  console.log(catFood);
-  
-  */
+// Example 1 (reducing to single value)
+const items = [
+  { name: "Apple", price: 100 },
+  { name: "Banana", price: 30 },
+  { name: "Chocolate", price: 340 },
+];
+
+const calcItem = items.reduce((acc, item) => {
+  return (acc += item.price);
+}, 0);
+
+console.log(calcItem);
+
+
+// Example 2 (by category; still confusing)
+const foods = [
+  { name: "Apple", category: "Fruit" },
+  { name: "Lettuce", category: "Vegetable" },
+  { name: "Banana", category: "Fruit" },
+  { name: "Carrot", category: "Vegetable" },
+];
+
+const catFood = foods.reduce((acc, food) => {
+  const category = food.category;
+  if (!acc[category]) {
+      acc[category] = [];
+    }
+  acc[category].push(food.name);
+  return acc;
+}, {});
+
+console.log(catFood);
+
+*/
+
+// ----> Functions <----
+
+// Callback Functions (When you run this code, you'll see "Start" and "End" logged to the console immediately, followed by "Callback result: Done!" after a 2-second delay. This demonstrates how the callback function allows you to continue with other tasks while waiting for the asynchronous operation to complete.)
+/*
+// Function that takes a callback
+function doSomethingAsync(callback) {
+  setTimeout(() => {
+    const result = "Done!";
+    callback(result);
+  }, 2000); // Simulate an asynchronous operation
+}
+
+// Callback function
+function callbackFunction(result) {
+  console.log("Callback result:", result);
+}
+
+// Calling the function with the callback
+console.log("Start");
+doSomethingAsync(callbackFunction);
+console.log("End");
+*/
+
+// Currying function (https://dev.to/leonardorafael/beyond-basic-functions-explore-currying-in-javascript-16lp)
+function greetings(salutation) {
+  return function (name) {
+    return `${salutation}, ${name}!`;
+  };
+}
+
+const sayHello = greetings("Hello");
+const sayHi = greetings("Hi");
+
+console.log(sayHello("Alice")); // Output: Hello, Alice!
+console.log(sayHi("Bob")); // Output: Hi, Bob!
+
+// ----> Operator <----
+
+// Use rest to enclose the rest of user-specific values into an array: (https://www.freecodecamp.org/news/javascript-rest-vs-spread-operators/)
+function myBioRes(firstName, lastName, ...otherInfo) {
+  return otherInfo; // Will return ["CodeSweetly", "Web Developer", "Male"]
+}
+
+myBioRes("Faizan", "Raza", "Yonasi", "MERN Developer", "Male");
+
+// Spread
+function myBioSpr(firstName, lastName, company) {
+  return `${firstName} ${lastName} runs ${company}`; // Will Return “Oluwatobi Sofela runs CodeSweetly”
+}
+
+// Use spread to expand an array’s items into individual arguments:
+myBioSpr(...["Faizan", "Raza", "CodeSweetly"]);
+
+// Practicing spread
+const arr = ['Chocolate', 'Tomato', 'BBQ'];
+const arr2 = 
